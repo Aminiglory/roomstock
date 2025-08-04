@@ -1,5 +1,24 @@
-{% extends "main.html" %} 
-{% load static %} 
-{% block content %}
-<h2>View your profile</h2>
+{% extends "main.html" %} {% block content %}
+<h2 class="title">Profile</h2>
+
+<div class="form-wrapper">
+  <div class="profile-details">
+    <h2>Profile Details</h2>
+    <div class="profile-pic">
+      <h2>{{user.username|first|upper}}</h2>
+    </div>
+    <hr />
+    <div class="profile-more">
+      <h2>Profile More details</h2>
+      {#  Todo: display teh firstname and the lastname  #}
+      <p>Username: <span class="">{{user.username}}</span></p>
+      <p>{% if user.is_superuser %}Email: {{user.email}}{% endif %}</p>
+      <p>
+        {% if user.is_superuser %}You are super stock manager you can manage everything
+        !!!!! {% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}

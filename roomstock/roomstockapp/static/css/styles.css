@@ -1,57 +1,89 @@
 .form-wrapper {
-    max-width: 450px;
-    margin: 60px auto;
-    padding: 40px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  }
+  max-width: 450px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
 
-  .form-wrapper h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-  }
+.form-wrapper h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
 
-  .form-wrapper p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 24px;
-  }
+.form-wrapper p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 24px;
+}
 
-  .form-wrapper form p {
-    margin-bottom: 16px;
-  }
+.form-wrapper form p {
+  margin-bottom: 16px;
+}
 
-  .form-wrapper input[type="text"],
-  .form-wrapper input[type="password"],
-  .form-wrapper input[type="email"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 15px;
-    margin-top: 6px;
-  }
+.form-wrapper input[type="text"],
+.form-wrapper input[type="password"],
+.form-wrapper input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  margin-top: 6px;
+}
 
-  .form-wrapper input:focus {
-    border-color: #4CAF50;
-    outline: none;
-  }
+.form-wrapper input:focus {
+  border-color: #4caf50;
+  outline: none;
+}
 
-  .form-wrapper button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+.form-wrapper button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  .form-wrapper button:hover {
-    background-color: #388E3C;
-  }
+.form-wrapper button:hover {
+  background-color: #388e3c;
+}
+
+/* Profile page designs */
+
+.title{
+  margin: 20px 50px 20px 20px;
+}
+.profile-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: space-around;
+}
+
+.profile-pic{
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+.profile-pic h2{
+  font-size: 200px;
+  color: #fff;
+}
+
+.profile-more p{
+  font-weight: bold;
+}
