@@ -1,0 +1,212 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  .hero-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .cta-primary {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+  }
+
+  .cta-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .cta-secondary:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-2px);
+  }
+
+  .features-section {
+    padding: 4rem 2rem;
+    background: white;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 15px;
+    background: #f8f9fa;
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .feature-description {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .cta-btn {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Welcome to RoomStock</h1>
+    <p class="hero-subtitle">
+      The ultimate stock management solution for your home and business. 
+      Keep track of your inventory with ease, get real-time updates, and never run out of essential items again.
+    </p>
+    <div class="cta-buttons">
+      <a href="{% url 'register' %}" class="cta-btn cta-primary">Get Started Free</a>
+      <a href="{% url 'login' %}" class="cta-btn cta-secondary">Sign In</a>
+    </div>
+  </div>
+</div>
+
+<div class="features-section">
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📦</div>
+      <h3 class="feature-title">Smart Inventory Tracking</h3>
+      <p class="feature-description">
+        Keep track of all your items with our intuitive inventory management system. 
+        Never lose track of what you have or what you need.
+      </p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3 class="feature-title">Real-time Analytics</h3>
+      <p class="feature-description">
+        Get insights into your stock levels, usage patterns, and trends. 
+        Make informed decisions about your inventory.
+      </p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">🔔</div>
+      <h3 class="feature-title">Smart Notifications</h3>
+      <p class="feature-description">
+        Get alerts when items are running low or expiring soon. 
+        Stay ahead of your inventory needs.
+      </p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3 class="feature-title">Easy Access</h3>
+      <p class="feature-description">
+        Access your inventory from anywhere, anytime. 
+        Our responsive design works on all devices.
+      </p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3 class="feature-title">Fast & Reliable</h3>
+      <p class="feature-description">
+        Lightning-fast performance with reliable data storage. 
+        Your inventory data is safe and secure.
+      </p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3 class="feature-title">User-Friendly</h3>
+      <p class="feature-description">
+        Simple and intuitive interface designed for everyone. 
+        No technical skills required to get started.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

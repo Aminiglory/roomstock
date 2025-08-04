@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room-Stock</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 28px;
+        font-weight: 700;
+        text-decoration: none;
+        color: #333;
+        transition: transform 0.3s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .logo-icon::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+        transform: rotate(45deg);
+        animation: shine 3s infinite;
+      }
+
+      @keyframes shine {
+        0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      }
+
+      .logo-text {
+        display: flex;
+        align-items: baseline;
+        gap: 2px;
+      }
+
+      .logo-room {
+        color: #333;
+        font-weight: 600;
+      }
+
+      .logo-stock {
+        color: #4CAF50;
+        font-weight: 800;
+        text-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+        position: relative;
+      }
+
+      .logo-stock::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #4CAF50, #45a049);
+        border-radius: 1px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+
+      .logo:hover .logo-stock::after {
+        transform: scaleX(1);
+      }
+
+      nav .nav-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      nav .nav-links a {
+        text-decoration: none;
+        color: #555;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      nav .nav-links a:hover {
+        color: #000;
+      }
+
+      .user-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 25px;
+        border: 1px solid #dee2e6;
+        transition: all 0.3s ease;
+      }
+
+      .user-info:hover {
+        background: linear-gradient(135deg, #e9ecef, #dee2e6);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+
+      .username {
+        font-weight: 600;
+        color: #495057;
+        font-size: 14px;
+      }
+
+      .logout-btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        background-color: #dc3545;
+        color: white;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .logout-btn:hover {
+        background-color: #c82333;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+      }
+
+      nav .auth-buttons a button {
+        padding: 0.5rem 1rem;
+        margin-left: 1rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      nav .auth-buttons a button:hover {
+        background-color: #388e3c;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .logo {
+          font-size: 24px;
+        }
+
+        .logo-icon {
+          width: 35px;
+          height: 35px;
+          font-size: 18px;
+        }
+
+        .user-section {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .user-info {
+          padding: 0.4rem 0.8rem;
+        }
+
+        .user-avatar {
+          width: 28px;
+          height: 28px;
+          font-size: 12px;
+        }
+
+        .username {
+          font-size: 13px;
+        }
+
+        nav .auth-buttons {
+          margin-top: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'index' %}" class="logo">
+        <div class="logo-icon">📦</div>
+        <div class="logo-text">
+          <span class="logo-room">Room</span>
+          <span class="logo-stock">Stock</span>
+        </div>
+      </a>
+      
+      {% if user.is_authenticated %}
+        <div class="nav-links">
+          <a href="{% url 'index' %}">Dashboard</a>
+          <a href="{% url 'inventory_list' %}">View Inventory</a>
+          <a href="{% url 'add_item' %}">Add Item</a>
+        </div>
+        
+        <div class="user-section">
+          <div class="user-info">
+            <div class="user-avatar">
+              {{ user.username|first|upper }}
+            </div>
+            <span class="username">{{ user.username }}</span>
+          </div>
+          <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+      {% else %}
+        <div class="auth-buttons">
+          <a href="{% url 'login' %}"><button>Login</button></a>
+          <a href="{% url 'register' %}"><button>Register</button></a>
+        </div>
+      {% endif %}
+    </nav>
+  </body>
+</html>

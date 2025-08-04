@@ -1,0 +1,317 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  .add-item-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+  }
+
+  .back-button:hover {
+    background: #5a6268;
+    transform: translateY(-1px);
+  }
+
+  .add-item-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .add-item-header {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .add-item-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .add-item-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .add-item-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  .add-item-form {
+    padding: 2rem;
+  }
+
+  .form-section {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: #28a745;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+  }
+
+  .form-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+  }
+
+  .form-textarea:focus {
+    outline: none;
+    border-color: #28a745;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+  }
+
+  .form-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    cursor: pointer;
+  }
+
+  .form-select:focus {
+    outline: none;
+    border-color: #28a745;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+  }
+
+  .form-btn {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .create-btn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  }
+
+  .create-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+  }
+
+  .cancel-btn {
+    background: #6c757d;
+    color: white;
+  }
+
+  .cancel-btn:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+  }
+
+  .error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #f5c6cb;
+  }
+
+  .success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #c3e6cb;
+  }
+
+  .form-tips {
+    background: #e8f5e8;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #28a745;
+  }
+
+  .tips-title {
+    font-weight: 600;
+    color: #155724;
+    margin-bottom: 0.5rem;
+  }
+
+  .tips-list {
+    color: #155724;
+    font-size: 0.9rem;
+  }
+
+  .tip-item {
+    margin-bottom: 0.25rem;
+  }
+
+  .tip-item:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .add-item-container {
+      margin: 1rem auto;
+    }
+    
+    .add-item-title {
+      font-size: 1.5rem;
+    }
+    
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+    }
+    
+    .form-btn {
+      justify-content: center;
+    }
+  }
+</style>
+
+<div class="add-item-container">
+  <a href="{% url 'index' %}" class="back-button">
+    ← Back to Dashboard
+  </a>
+
+  <div class="add-item-card">
+    <div class="add-item-header">
+      <h1 class="add-item-title">Add New Item</h1>
+      <p class="add-item-subtitle">Create a new inventory item for your stock management</p>
+    </div>
+    
+    <form method="POST" class="add-item-form">
+      {% csrf_token %}
+      
+      {% if form.errors %}
+        <div class="error-message">
+          Please correct the errors below.
+        </div>
+      {% endif %}
+      
+      {% if messages %}
+        {% for message in messages %}
+          <div class="{% if message.tags == 'error' %}error-message{% else %}success-message{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <div class="form-tips">
+        <div class="tips-title">💡 Tips for adding items:</div>
+        <div class="tips-list">
+          <div class="tip-item">• Use descriptive names for easy identification</div>
+          <div class="tip-item">• Set appropriate categories for better organization</div>
+          <div class="tip-item">• Include accurate quantities and prices</div>
+          <div class="tip-item">• Add detailed descriptions for better tracking</div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <h2 class="section-title">Basic Information</h2>
+        {{ form.as_p }}
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="form-btn create-btn">
+          💾 Create Item
+        </button>
+        <a href="{% url 'index' %}" class="form-btn cancel-btn">
+          ❌ Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %} 

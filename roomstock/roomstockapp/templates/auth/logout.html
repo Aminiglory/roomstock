@@ -1,0 +1,242 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  .logout-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .logout-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 3rem;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    animation: slideIn 0.6s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .logout-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 2.5rem;
+    animation: bounce 1s ease-in-out;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .logout-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .logout-message {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .logout-details {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #28a745;
+  }
+
+  .logout-time {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  .logout-info {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .login-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+  }
+
+  .login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+  }
+
+  .home-btn {
+    background: #6c757d;
+    color: white;
+  }
+
+  .home-btn:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+  }
+
+  .security-tips {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #e8f5e8;
+    border-radius: 12px;
+    border: 1px solid #c3e6cb;
+  }
+
+  .security-title {
+    font-weight: 600;
+    color: #155724;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .security-list {
+    text-align: left;
+    color: #155724;
+    font-size: 0.9rem;
+  }
+
+  .security-item {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .security-item:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .logout-container {
+      padding: 1rem;
+    }
+    
+    .logout-card {
+      padding: 2rem;
+    }
+    
+    .logout-title {
+      font-size: 1.8rem;
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+    }
+    
+    .action-btn {
+      justify-content: center;
+    }
+  }
+</style>
+
+<div class="logout-container">
+  <div class="logout-card">
+    <div class="logout-icon">
+      ✅
+    </div>
+    
+    <h1 class="logout-title">Successfully Logged Out!</h1>
+    <p class="logout-message">
+      You have been securely logged out of your RoomStock account. 
+      Thank you for using our inventory management system.
+    </p>
+    
+    <div class="logout-details">
+      <div class="logout-time">Logout Time: {{ logout_time|default:"Just now" }}</div>
+      <div class="logout-info">
+        Your session has been terminated and all data has been securely cleared.
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <a href="{% url 'login' %}" class="action-btn login-btn">
+        🔐 Login Again
+      </a>
+      <a href="{% url 'index' %}" class="action-btn home-btn">
+        🏠 Go to Home
+      </a>
+    </div>
+    
+    <div class="security-tips">
+      <div class="security-title">
+        🔒 Security Tips
+      </div>
+      <div class="security-list">
+        <div class="security-item">
+          ✅ Always log out when using shared computers
+        </div>
+        <div class="security-item">
+          ✅ Keep your password secure and unique
+        </div>
+        <div class="security-item">
+          ✅ Enable two-factor authentication if available
+        </div>
+        <div class="security-item">
+          ✅ Regularly update your password
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %} 

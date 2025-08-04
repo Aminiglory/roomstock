@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="form-wrapper">
+    <h2>New to Roomstock 👊🔏</h2>
+    <p>A special stock management for ur home !!!</p>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Register</button>
+    </form>
+</div>
+{% endblock content %}
