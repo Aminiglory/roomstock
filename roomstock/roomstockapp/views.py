@@ -65,6 +65,10 @@ def logout_view(request):
         'logout_time': 'Just now'
     })
 
+def view_profile(request):
+    if request.user.is_authenticated:
+        return render(request,'auth/viewprofile.html')
+
 def addnewitem(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)

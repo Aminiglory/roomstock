@@ -161,6 +161,7 @@
         font-weight: bold;
         font-size: 14px;
         text-transform: uppercase;
+        text-decoration: none;
       }
 
       .username {
@@ -267,7 +268,9 @@
         <div class="user-section">
           <div class="user-info">
             <div class="user-avatar">
+              <a href="{% url 'profile' %}" class="user-avatar">
               {{ user.username|first|upper }}
+            </a>
             </div>
             <span class="username">{{ user.username }}</span>
           </div>
