@@ -1,24 +1,333 @@
-{% extends "main.html" %} {% block content %}
-<h2 class="title">Profile</h2>
+{% extends "main.html" %}
+{% load static %}
 
-<div class="form-wrapper">
-  <div class="profile-details">
-    <h2>Profile Details</h2>
-    <div class="profile-pic">
-      <h2>{{user.username|first|upper}}</h2>
+{% block content %}
+<style>
+  .profile-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  .profile-header {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+  }
+
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+    border: 4px solid rgba(255,255,255,0.3);
+  }
+
+  .profile-name {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-role {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .profile-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .card-header {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4CAF50;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .info-item:last-child {
+    border-bottom: none;
+  }
+
+  .info-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .info-value {
+    color: #666;
+  }
+
+  .activity-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .activity-item:last-child {
+    border-bottom: none;
+  }
+
+  .activity-icon {
+    width: 40px;
+    height: 40px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+  }
+
+  .activity-content {
+    flex: 1;
+  }
+
+  .activity-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.25rem;
+  }
+
+  .activity-time {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .settings-section {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+  }
+
+  .settings-header {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .settings-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .settings-content {
+    padding: 1.5rem;
+  }
+
+  .setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .setting-item:last-child {
+    border-bottom: none;
+  }
+
+  .setting-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .action-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+
+
+
+
+  @media (max-width: 768px) {
+    .profile-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="profile-avatar">
+      {{ user.username|first|upper }}
     </div>
-    <hr />
-    <div class="profile-more">
-      <h2>Profile More details</h2>
-      {#  Todo: display teh firstname and the lastname  #}
-      <p>Username: <span class="">{{user.username}}</span></p>
-      <p>{% if user.is_superuser %}Email: {{user.email}}{% endif %}</p>
-      <p>
-        {% if user.is_superuser %}You are super stock manager you can manage everything
-        !!!!! {% endif %}
-      </p>
+    <h1 class="profile-name">{{ user.username }}</h1>
+    <p class="profile-role">
+      {% if user.is_superuser %}
+        Super Stock Manager
+      {% else %}
+        Stock Manager
+      {% endif %}
+    </p>
+  </div>
+
+  <div class="profile-grid">
+    <div class="profile-card">
+      <div class="card-header">
+        <h2 class="card-title">📊 Account Statistics</h2>
+      </div>
+      <div class="card-content">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">{{ total_products|default:"0" }}</div>
+            <div class="stat-label">Total Products</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ low_stock_items|default:"0" }}</div>
+            <div class="stat-label">Low Stock Items</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ total_categories|default:"0" }}</div>
+            <div class="stat-label">Categories</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ total_value|default:"0"|floatformat:0 }} RWF</div>
+            <div class="stat-label">Total Value</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <div class="card-header">
+        <h2 class="card-title">👤 Account Information</h2>
+      </div>
+      <div class="card-content">
+        <div class="info-item">
+          <span class="info-label">Username:</span>
+          <span class="info-value">{{ user.username }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Email:</span>
+          <span class="info-value">{{ user.email|default:"Not provided" }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Date Joined:</span>
+          <span class="info-value">{{ user.date_joined|date:"M d, Y" }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Last Login:</span>
+          <span class="info-value">{{ user.last_login|date:"M d, Y H:i"|default:"Never" }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Account Status:</span>
+          <span class="info-value">
+            {% if user.is_active %}
+              <span style="color: #28a745;">● Active</span>
+            {% else %}
+              <span style="color: #dc3545;">● Inactive</span>
+            {% endif %}
+          </span>
+        </div>
+        {% if user.is_superuser %}
+        <div class="info-item">
+          <span class="info-label">Role:</span>
+          <span class="info-value" style="color: #ffc107; font-weight: 600;">Super Administrator</span>
+        </div>
+        {% endif %}
+      </div>
     </div>
   </div>
 </div>
-
 {% endblock content %}
